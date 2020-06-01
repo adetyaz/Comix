@@ -6,9 +6,9 @@
       :key="index"
     >
       <a href="#">
-        <img class="hover:grow hover:shadow-lg" :src="character.imageUrl" />
+        <img class="hover:grow hover:shadow-lg" :src="character.primaryImage" />
         <div class="pt-3 flex items-center justify-between">
-          <p class="">{{ character.name }}</p>
+          <p class>{{ character.name }}</p>
         </div>
       </a>
     </div>
@@ -20,19 +20,19 @@ import apiService from "@/services/apiService.js";
 export default {
   data() {
     return {
-      characters: [],
+      characters: []
     };
   },
   created() {
     apiService
       .getCharacters()
-      .then((res) => {
-        this.characters = res.data;
-        console.log(this.characters);
+      .then(res => {
+        this.characters = res.data.results;
+        console.log(JSON.parse(JSON.stringify(this.characters)));
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(`The service cannot be loaded because ${error}`);
       });
-  },
+  }
 };
 </script>
